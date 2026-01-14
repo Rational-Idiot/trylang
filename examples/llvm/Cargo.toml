@@ -1,0 +1,10 @@
+[package]
+name = "llvm"
+version = "0.1.1"
+authors = ["Rational DUmbass"]
+edition = "2021"
+rust-version = "1.70"
+description = "LLVM example for calculator"
+
+[dependencies]
+inkwell = { version = "0.7.1", features = ["llvm20-1"] }

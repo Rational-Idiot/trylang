@@ -1,0 +1,20 @@
+Program = _{ SOI ~ Expr ~ EOF }
+
+Expr = { Term ~ ((Add | Subtract) ~ Term)* }
+Term = { Factor ~ ((Multiply | Divide) ~ Factor)* }
+Factor = { UnaryExpr | Primary }
+Primary = { Float | Int | "(" ~ Expr ~ ")" }
+
+UnaryExpr = { UnaryOp ~ Factor }
+UnaryOp = @{ "+" | "-" }
+
+Add      = { "+" }
+Subtract = { "-" }
+Multiply = { "*" }
+Divide   = { "/" }
+
+Int   = @{ ASCII_DIGIT+ }
+Float = @{ ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT+ }
+
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+EOF = _{ EOI | ";" }

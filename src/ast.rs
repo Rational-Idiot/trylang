@@ -1,0 +1,51 @@
+use std::fmt;
+
+use crate::val::Val;
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+// ANCHOR: operator
+pub enum Operator {
+    Plus,
+    Minus,
+    Multiply,
+    Divide,
+}
+// ANCHOR_END: operator
+
+impl fmt::Display for Operator {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> Result<(), fmt::Error> {
+        match &self {
+            Operator::Plus => write!(f, "+"),
+            Operator::Minus => write!(f, "-"),
+            Operator::Multiply => write!(f, "*"),
+            Operator::Divide => write!(f, "/"),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+// ANCHOR: node
+pub enum Node {
+    Val(Val),
+    UnaryExpr {
+        op: Operator,
+        child: Box<Node>,
+    },
+    BinaryExpr {
+        op: Operator,
+        lhs: Box<Node>,
+        rhs: Box<Node>,
+    },
+}
+// ANCHOR_END: node
+
+impl fmt::Display for Node {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> Result<(), fmt::Error> {
+        match &self {
+            Node::Val(Val::Int(n)) => write!(f, "{}", n),
+            Node::UnaryExpr { op, child } => write!(f, "{}{}", op, child),
+            Node::BinaryExpr { op, lhs, rhs } => write!(f, "{} {} {}", lhs, op, rhs),
+            Node::Val(Val::Float(n)) => write!(f, "{}", n),
+        }
+    }
+}
