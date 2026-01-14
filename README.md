@@ -8,7 +8,7 @@ built with the help of [the greats](https://createlang.rs)
 
 ## Features
 
-- It can calc [+, -, *, /]
+- It can calc [+, -, *, /, ()]
 
 ## Setup
 
