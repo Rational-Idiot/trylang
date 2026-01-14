@@ -1,3 +1,33 @@
-[workspace]
-members = ["crates/*"] 
-resolver = "3"
+[package]
+name = "calculator"
+version = "0.1.1"
+edition = "2024"
+authors = ["Aryan :yum:"]
+
+[dependencies]
+pest = "2.7"
+pest_derive = "2.7"
+anyhow = "1.0"
+rustyline = "12.0"
+cfg-if = "1.0"
+home = "=0.5.9"
+inkwell = { version = "0.7.1", features = ["llvm20-1"], optional = true }
+ordered-float = "5.1.0"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+test = false
+
+[[bin]]
+name = "repl"
+test = false
+
+[features]
+default = ["interpreter"]
+jit = ["inkwell"]
+interpreter = []
+vm = []
